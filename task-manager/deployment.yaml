@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: task-manager
-          image: yourdockerhubusername/task-manager:latest
+          image: ghcr.io/aswinsunil/task-manager:latest
           ports:
             - containerPort: 3000
           env:
