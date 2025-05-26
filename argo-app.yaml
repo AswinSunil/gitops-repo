@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: task-manager
+  namespace: argocd
+spec:
+  destination:
+    namespace: default
+    server: https://kubernetes.default.svc
+  source:
+    repoURL: https://github.com/aswinsunil/gitops-repo.git
+    targetRevision: HEAD
+    path: task-manager
+  project: default
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
