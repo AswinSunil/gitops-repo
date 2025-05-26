@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: task-manager
-          image: ghcr.io/aswinsunil/task-manager:${{ github.sha }}
+          image: ghcr.io/aswinsunil/task-manager:cf21e4f570f8f8636a87d591977ba783a661510d
           ports:
             - containerPort: 3000
           env:
