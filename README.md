@@ -93,28 +93,44 @@ step:4
 Access the argocd web ui using the below address in your browser. Note: this address will work only when the above service is running so do not close the above terminal.
 https://localhost:8080
 
+![](output_images/Screenshot%20_1.png)
+
 The default username of argocd is admin
 TO know the password use the command: kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
 
 use the username and password to login into argocd web ui. After logging in we can see that Application Custom Resource is not created; we can create it here or by using yaml file.
+
+![](output_images/Screenshot%20_2.png)
+
+![](output_images/Screenshot%20_3.png)
 
 Application custom resource created using yaml file:
 
 1. The argo-app.yaml file must be placed in the root directory of gitops-repo
 2. apply the argo-app.yaml file in the argocd namespace: kubectl apply -f argo-app.yaml -n argocd
 3. Now see the argocd web Ui an application custom resource would have been created.
-4. If you click the application you can see the application custom resource made argocd to apply deployments, services, etc. (our application) in our gitops-repo automatically.
+
+![](output_images/Screenshot%20_4.png)
+
+4. If you click the application you can see the application custom resource made argocd to apply deployments, services, etc. (our application) in our gitops-repo to the cluster automatically.
+
+![](output_images/Screenshot%20_5.png)
 ________________________________________________________________________________
 
 Accessing our application:
 
 In service.yaml file we configured that our application will be available at port 3000; for http://localhost:3000 to work, you must have the below command running in a separate terminal window:
 kubectl port-forward service/task-manager 3000:80
+Note: we can either use the above command and local host to access our application or see in which pod our application is running and use that pod's IP and port no but the former method is preferred because ip adddress of the pod is not static.
 
 Now access the application at http://localhost:3000 no task will be present because we still did not add any task to our task manager application.
+
+![](output_images/Screenshot%20_6.png)
 
 run this command to add a task curl -X POST \
      -H "Content-Type: application/json" \
      -d '{"title": "Finish resume project", "completed": false}' \
      http://localhost:3000/tasks
+
+![](output_images/Screenshot%20_7.png)
 ________________________________________________________________________________
